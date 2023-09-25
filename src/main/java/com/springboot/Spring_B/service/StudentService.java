@@ -4,6 +4,7 @@ import com.springboot.Spring_B.entity.Book;
 import com.springboot.Spring_B.entity.Student;
 import com.springboot.Spring_B.repository.BookRepository;
 import com.springboot.Spring_B.repository.StudentRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +20,7 @@ public class StudentService {
     @Autowired
     private BookRepository bookRepository;
 
+    @Transactional
     public Student addStudent(Student student)
     {
         if (student.getBooks() == null) {
@@ -32,6 +34,7 @@ public class StudentService {
         return studentRepository.save(student);
     }
 
+@Transactional
     public Book addBook(long id, Book book) {
         Student student = findStudentById(id);
         if (student!= null) {
@@ -59,7 +62,7 @@ public class StudentService {
         return bookRepository.findAll();
     }
 
-
+    @Transactional
     public boolean deleteStudentById(Long id) {
         try {
             bookRepository.deleteByStudentId(id);
@@ -70,6 +73,7 @@ public class StudentService {
         }
     }
 
+    @Transactional
     public boolean deleteBookByStudentIdAndId(Long idS, Long idB) {
         Student student = findStudentById(idS);
         if(student != null)
@@ -89,6 +93,7 @@ public class StudentService {
         return bookRepository.findByStudentIdAndId(idS, idB).orElse(null);
     }
 
+    @Transactional
     public Student updateStudentById(Long id, Student newStudent)// here first parameter is book id mind it
     {
         Student student = findStudentById(id);
@@ -106,7 +111,7 @@ public class StudentService {
         }
         return null;
     }
-
+@Transactional
     public Book updateBookById(Long id, Book newBook)// here first parameter is book id mind it
     {
         Book book = findBookById(id);
