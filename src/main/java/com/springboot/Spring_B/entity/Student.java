@@ -19,7 +19,7 @@ public class Student {
     private String name;
     private String email;
     private LocalDate dob;
-    @OneToMany(mappedBy = "student")//
+    @OneToMany(mappedBy = "student",fetch = FetchType.LAZY)// to stop loop of excecuting queries
     /* This annotation tells Jackson to omit the serialization of the author field when serializing Book objects to JSON.
      The purpose of this is to avoid circular references and infinite loops during serialization.
       Without @JsonBackReference, when serializing an Author object, Jackson would include the associated Book objects,

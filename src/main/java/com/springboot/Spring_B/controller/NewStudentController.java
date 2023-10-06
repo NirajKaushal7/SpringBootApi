@@ -16,6 +16,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/students")
+@CrossOrigin(origins = "*")
 public class NewStudentController {
     @Autowired
     private StudentService studentService;
@@ -92,7 +93,7 @@ public class NewStudentController {
     public ResponseEntity<List<Book>> getBooksByStudentId(@PathVariable("id") Long id)//here pathVariable comes from url and we assign in id
     {
         Student student = studentService.findStudentById(id);
-        if (student != null)
+        if(student != null)
             return ResponseEntity.ok(student.getBooks());
         else
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Student not Found on this id.");

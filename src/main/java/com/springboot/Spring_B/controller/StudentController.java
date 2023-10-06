@@ -13,6 +13,7 @@ import java.util.Optional;
 /*It combines the @Controller and @ResponseBody annotations, providing a convenient way to create
  RESTful APIs that return data in various formats (e.g., JSON, XML) directly to the client*/
 @RestController
+@CrossOrigin("*")
 @RequestMapping("/student")
 public class StudentController
 {
